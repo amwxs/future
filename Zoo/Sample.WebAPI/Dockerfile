@@ -7,6 +7,8 @@ EXPOSE 80
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["Sample.WebAPI/Sample.WebAPI.csproj", "Sample.WebAPI/"]
+COPY ["Zoo.Dolphin/Zoo.Dolphin.csproj", "Zoo.Dolphin/"]
+COPY ["Zoo.Woody/Zoo.Woody.csproj", "Zoo.Woody/"]
 RUN dotnet restore "Sample.WebAPI/Sample.WebAPI.csproj"
 COPY . .
 WORKDIR "/src/Sample.WebAPI"

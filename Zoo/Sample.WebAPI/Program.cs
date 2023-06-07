@@ -18,7 +18,6 @@ namespace Sample.WebAPI
 
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-            builder.Services.AddHealthChecks();
             
             // 添加框架
             builder.Services.AddDolphin(builder.Configuration);

@@ -7,6 +7,15 @@
       },
       "dotnetRunMessages": true,
       "applicationUrl": "http://0.0.0.0:5207"
+    },
+    "WSL": {
+      "commandName": "WSL2",
+      "launchUrl": "http://0.0.0.0:5207",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ASPNETCORE_URLS": "http://0.0.0.0:5207"
+      },
+      "distributionName": ""
     }
   }
 }

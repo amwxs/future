@@ -8,6 +8,7 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["Sample.GrpcService/Sample.GrpcService.csproj", "Sample.GrpcService/"]
+COPY ["Zoo.Dolphin/Zoo.Dolphin.csproj", "Zoo.Dolphin/"]
 RUN dotnet restore "Sample.GrpcService/Sample.GrpcService.csproj"
 COPY . .
 WORKDIR "/src/Sample.GrpcService"
