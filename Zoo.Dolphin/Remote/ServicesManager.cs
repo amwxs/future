@@ -1,91 +1,52 @@
 ﻿using Consul;
 using Microsoft.Extensions.Logging;
-using System.Collections.Concurrent;
+using Zoo.Dolphin.Register.Client;
 
-namespace Zoo.Dolphin.Remote
+namespace Zoo.Dolphin.Remote;
+
+public class ServicesManager : IDisposable, IServicesManager
 {
-    public class ServicesManager : IDisposable, IServicesManager
+
+    private readonly ILogger<ServicesManager> _logger;
+    private readonly IConsulClientProvider _consulClientProvider;
+    private readonly Timer _timer;
+
+    public ServicesManager(IConsulClientProvider consulClientProvider, ILogger<ServicesManager> logger)
+    {
+        _consulClientProvider = consulClientProvider;
+        _timer = new Timer(x => RefreshServicesCache(), null, 0, 3000);
+        _logger = logger;
+    }
+
+    public Task<List<ServiceEntry>> GetServices(string serviceName)
+    {
+        return GetServicesFromRemote(serviceName);
+    }
+
+    protected async Task<List<ServiceEntry>> GetServicesFromRemote(string serviceName)
     {
 
-        private readonly ConcurrentDictionary<string, List<ServiceEntry>> _servicesCache = new();
-        private readonly ILogger<ServicesManager> _logger;
-        private readonly IConsulClientProvider _consulClientProvider;
-        private readonly Timer _timer;
-        private bool _refreshFlag = false;
-
-        public ServicesManager(IConsulClientProvider consulClientProvider, ILogger<ServicesManager> logger)
+        try
         {
-            _consulClientProvider = consulClientProvider;
-            _timer = new Timer(x => RefreshServicesCache(), null, 0, 3000);
-            _logger = logger;
+            var response = await _consulClientProvider.GetConsul().Health.Service(serviceName, null, true).ConfigureAwait(false);
+            var serviceEntries = response.Response.Where(x => x.Service.Tags == null || x.Service.Tags.All(x => x.ToLower() != "dev")).ToList();
+            return serviceEntries;
         }
-
-        public async Task<List<ServiceEntry>> GetServices(string serviceName)
+        catch (Exception ex)
         {
-            return _servicesCache.GetOrAdd(serviceName, await GetServicesFromRemote(serviceName));
+            _logger.LogError(ex, "No registration node found for service {serviceName}", serviceName);
+
+            throw;
         }
+    }
 
-        public async Task<List<ServiceEntry>> GetServicesFromRemote(string serviceName)
-        {
+    private void RefreshServicesCache()
+    {
 
-            try
-            {
-                var response = await _consulClientProvider.GetConsul().Health.Service(serviceName, null, true).ConfigureAwait(false);
-                var serviceEntries = response.Response.Where(x => x.Service.Tags == null || x.Service.Tags.All(x => x.ToLower() != "development")).ToList();
+    }
 
-                if (!serviceEntries.Any())
-                {
-                    throw new NullReferenceException($"No registration node found for service {serviceName}");
-                }
-
-                return serviceEntries;
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "No registration node found for service {serviceName}", serviceName);
-
-                throw;
-            }
-        }
-
-        private async Task RefreshAsync(string serviceName)
-        {
-            try
-            {
-                _servicesCache.GetOrAdd(serviceName, await GetServicesFromRemote(serviceName));
-
-            }
-            catch (Exception ex)
-            {
-                _servicesCache.TryRemove(serviceName, out _);
-                _logger.LogError(ex, "Failed to refresh {serviceName}.", serviceName);
-            }
-        }
-
-
-        public void RefreshServicesCache()
-        {
-
-            if (_refreshFlag)
-            {
-                _refreshFlag = false;
-                var serviceNames = _servicesCache.Keys;
-
-                var tasks = new List<Task>();
-                foreach (var serviceName in serviceNames)
-                {
-                    var t = RefreshAsync(serviceName);
-                    tasks.Add(t);
-                }
-                Task.WaitAll(tasks.ToArray());
-
-                _refreshFlag = true;
-            }
-        }
-
-        public void Dispose()
-        {
-            _timer.Dispose();
-        }
+    public void Dispose()
+    {
+        _timer?.Dispose();
     }
 }

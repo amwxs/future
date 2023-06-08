@@ -11,12 +11,12 @@ namespace Sample.APIService.Controllers
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
 
-        private readonly ILogger<WeatherForecastController> _logger;
+
 
         private readonly IHelloService helloService;
-        public WeatherForecastController(ILogger<WeatherForecastController> logger, IHelloService helloService)
+        public WeatherForecastController(IHelloService helloService)
         {
-            _logger = logger;
+
             this.helloService = helloService;
         }
 

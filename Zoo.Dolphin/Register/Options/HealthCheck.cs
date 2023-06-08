@@ -1,12 +1,4 @@
-﻿namespace Zoo.Dolphin;
-
-public class ConsulOptions
-{
-    public const string Section = "Consul";
-    public string Address { get; set; } = string.Empty;
-    public string[]? Tags { get; set; }
-    public HealthCheck HealthCheck { get; set; } = new();
-}
+﻿namespace Zoo.Dolphin.Register.Options;
 
 public class HealthCheck
 {
@@ -25,10 +17,4 @@ public class HealthCheck
             _ => HealthCheckEnum.GRPC,
         };
     }
-}
-public enum HealthCheckEnum
-{
-    HTTP =0,
-    GRPC =1,
-    TCP = 2
 }

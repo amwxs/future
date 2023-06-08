@@ -1,11 +1,8 @@
 ﻿using Consul;
 
-namespace Zoo.Dolphin.Remote
+namespace Zoo.Dolphin.Remote;
+
+public interface IServicesManager
 {
-    public interface IServicesManager
-    {
-        Task<List<ServiceEntry>> GetServices(string serviceName);
-        Task<List<ServiceEntry>> GetServicesFromRemote(string serviceName);
-        void RefreshServicesCache();
-    }
+    Task<List<ServiceEntry>> GetServices(string serviceName);
 }

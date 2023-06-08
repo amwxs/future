@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Zoo.Dolphin.Remote.Http;
 
-namespace Zoo.Dolphin.Remote.Http
+public interface IRemoteHttp
 {
-    internal interface IRemoteHttp
-    {
-    }
+    T GetAsync<T>(string url, Dictionary<string, string> querys, Dictionary<string, string> headers);
 }

@@ -1,4 +1,4 @@
-﻿namespace Zoo.Dolphin;
+﻿namespace Zoo.Dolphin.Application;
 
 internal class AppConst
 {
