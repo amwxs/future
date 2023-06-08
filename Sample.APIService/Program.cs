@@ -20,6 +20,7 @@ namespace Sample.APIService
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
+                
             }
 
             app.UseAuthorization();

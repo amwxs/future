@@ -4,7 +4,6 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System.Text;
-using System.Threading;
 
 namespace Zoo.Dolphin
 {
@@ -20,7 +19,7 @@ namespace Zoo.Dolphin
             IHostApplicationLifetime hostApplicationLifetime,
             ILogger<ApplicationRegister> logger,
             IConsulClientProvider consulClientProvider,
-            IApplicationInfoProvider applicationInfoProvider, IOptions<ConsulOptions> options, IServer server)
+            IApplicationInfoProvider applicationInfoProvider, IOptions<ConsulOptions> options)
         {
             _hostApplicationLifetime = hostApplicationLifetime;
             _logger = logger;

@@ -1,8 +1,7 @@
-﻿namespace Zoo.Dolphin
+﻿namespace Zoo.Dolphin;
+
+internal class AppConst
 {
-    internal class AppConst
-    {
-        public const string AppId = "AppId";
-        public const string Urls = "urls";
-    }
+    public const string AppId = "AppId";
+    public const string Urls = "urls";
 }
