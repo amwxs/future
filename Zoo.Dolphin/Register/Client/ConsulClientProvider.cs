@@ -1,6 +1,6 @@
-﻿using Zoo.Dolphin.Register.Options;
-using Consul;
+﻿using Consul;
 using Microsoft.Extensions.Options;
+using Zoo.Dolphin.Register.Options;
 
 namespace Zoo.Dolphin.Register.Client;
 

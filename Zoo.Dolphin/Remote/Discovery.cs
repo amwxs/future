@@ -4,14 +4,14 @@ using Microsoft.Extensions.Logging;
 
 namespace Zoo.Dolphin.Remote;
 
-public class ServicesManager : IDisposable, IServicesManager
+public class Discovery : IDiscovery, IDisposable
 {
 
-    private readonly ILogger<ServicesManager> _logger;
+    private readonly ILogger<Discovery> _logger;
     private readonly IConsulClientProvider _consulClientProvider;
     private readonly Timer _timer;
 
-    public ServicesManager(IConsulClientProvider consulClientProvider, ILogger<ServicesManager> logger)
+    public Discovery(IConsulClientProvider consulClientProvider, ILogger<Discovery> logger)
     {
         _consulClientProvider = consulClientProvider;
         _timer = new Timer(x => RefreshServicesCache(), null, 0, 3000);

@@ -2,7 +2,7 @@
 
 namespace Zoo.Dolphin.Remote;
 
-public interface IServicesManager
+public interface IDiscovery
 {
     Task<List<ServiceEntry>> GetServices(string serviceName);
 }

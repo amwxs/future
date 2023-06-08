@@ -7,19 +7,19 @@ namespace Zoo.Dolphin;
 public class RegisterHosted : IHostedService
 {
     private readonly IHostApplicationLifetime _hostApplicationLifetime;
-    private readonly IRegisterManager _registerManager;
+    private readonly IServiceRegister _serviceRegister;
     public RegisterHosted(
         IHostApplicationLifetime hostApplicationLifetime,
-        IRegisterManager registerManager)
+        IServiceRegister registerManager)
     {
         _hostApplicationLifetime = hostApplicationLifetime;
-        _registerManager = registerManager;
+        _serviceRegister = registerManager;
     }
 
     public Task StartAsync(CancellationToken cancellationToken)
     {
-        _hostApplicationLifetime.ApplicationStarted.Register(() => _registerManager.Register());
-        _hostApplicationLifetime.ApplicationStopping.Register(() => _registerManager.DeRegister());
+        _hostApplicationLifetime.ApplicationStarted.Register(() => _serviceRegister.Register());
+        _hostApplicationLifetime.ApplicationStopping.Register(() => _serviceRegister.DeRegister());
 
         return Task.CompletedTask;
 

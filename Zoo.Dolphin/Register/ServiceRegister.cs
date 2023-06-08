@@ -1,25 +1,25 @@
-﻿using Zoo.Dolphin.Application;
-using Zoo.Dolphin.Register.Client;
+﻿using Zoo.Dolphin.Register.Client;
 using Zoo.Dolphin.Register.Options;
 using Consul;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using System.Text;
 
 namespace Zoo.Dolphin.Register;
 
-public class RegisterManager : IRegisterManager
+public class ServiceRegister : IServiceRegister
 {
     private readonly IConsulClientProvider _consulClientProvider;
-    private readonly IApplicationProvider _applicationInfoProvider;
+    private readonly IHostInfomation _hostInfomation;
     private readonly ConsulOptions _options;
-    private readonly ILogger<RegisterManager> _logger;
-    public RegisterManager(IConsulClientProvider consulClientProvider,
-        IApplicationProvider applicationInfoProvider,
+    private readonly ILogger<ServiceRegister> _logger;
+    public ServiceRegister(IConsulClientProvider consulClientProvider,
+        IHostInfomation hostInfomation,
         IOptions<ConsulOptions> options,
-        ILogger<RegisterManager> logger)
+        ILogger<ServiceRegister> logger)
     {
         _consulClientProvider = consulClientProvider;
-        _applicationInfoProvider = applicationInfoProvider;
+        _hostInfomation = hostInfomation;
         _options = options.Value;
         _logger = logger;
     }
@@ -33,29 +33,29 @@ public class RegisterManager : IRegisterManager
             DeregisterCriticalServiceAfter = TimeSpan.FromSeconds(_options.HealthCheck.Deregister)
         };
 
-        var appInfo = _applicationInfoProvider.GetAppInfo();
-
+        var hostIP = _hostInfomation.GetHostIp();
+        var port = _hostInfomation.GetPort();
         switch (_options.HealthCheck?.ToHealthCheckEnum())
         {
             case HealthCheckEnum.HTTP:
-                check.HTTP = $"http://{appInfo.HostIp}:{appInfo.Port}{_options.HealthCheck.Path}";
+                check.HTTP = $"http://{hostIP}:{port}{_options.HealthCheck.Path}";
                 break;
             case HealthCheckEnum.GRPC:
-                check.GRPC = $"{appInfo.HostIp}:{appInfo.Port}";
+                check.GRPC = $"{hostIP}:{port}";
                 break;
             case HealthCheckEnum.TCP:
-                check.TCP = $"{appInfo.HostIp}:{appInfo.Port}";
+                check.TCP = $"{hostIP}:{port}";
                 break;
             default:
                 break;
         }
-
+        var serviceId = GetServiceId();
         var registration = new AgentServiceRegistration()
         {
-            ID = appInfo.SericeId,
-            Name = appInfo.AppId,
-            Address = appInfo.HostIp,
-            Port = appInfo.Port,
+            ID = serviceId,
+            Name = _options.AppId,
+            Address = hostIP,
+            Port = port,
             Tags = _options.Tags,
             Checks = new[] { check }
         };
@@ -66,8 +66,24 @@ public class RegisterManager : IRegisterManager
 
     public void DeRegister()
     {
-        var appInfo = _applicationInfoProvider.GetAppInfo();
-        _consulClientProvider.GetConsul().Agent.ServiceDeregister(appInfo.AppId).GetAwaiter().GetResult();
+        var serviceId = GetServiceId();
+        _consulClientProvider.GetConsul().Agent.ServiceDeregister(serviceId).GetAwaiter().GetResult();
         _logger.LogInformation("Service unregistered successfully!");
+    }
+
+    private static string GetServiceId()
+    {
+        var basePath = Directory.GetCurrentDirectory();
+        var path = Path.Combine(basePath, ".id");
+        if (File.Exists(path))
+        {
+            var lines = File.ReadAllLines(path, Encoding.UTF8);
+            if (lines.Length > 0 && !string.IsNullOrEmpty(lines[0]))
+                return lines[0];
+        }
+
+        var id = Guid.NewGuid().ToString();
+        File.AppendAllLines(path, new[] { id });
+        return id;
     }
 }
