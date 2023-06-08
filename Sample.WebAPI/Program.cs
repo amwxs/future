@@ -1,4 +1,4 @@
-using Zoo.Dolphin;
+using AMW.ServiceDiscovery;
 using Zoo.Woody;
 
 namespace Sample.WebAPI

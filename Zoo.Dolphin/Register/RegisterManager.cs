@@ -1,11 +1,11 @@
-﻿using Consul;
+﻿using AMW.ServiceDiscovery.Application;
+using AMW.ServiceDiscovery.Register.Client;
+using AMW.ServiceDiscovery.Register.Options;
+using Consul;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Zoo.Dolphin.Application;
-using Zoo.Dolphin.Register.Client;
-using Zoo.Dolphin.Register.Options;
 
-namespace Zoo.Dolphin.Register;
+namespace AMW.ServiceDiscovery.Register;
 
 public class RegisterManager : IRegisterManager
 {

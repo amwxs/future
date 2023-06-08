@@ -1,21 +1,17 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-	
-  <ItemGroup>
-	<FrameworkReference Include="Microsoft.AspNetCore.App" />
-  </ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="Consul" Version="1.6.10.9" />
-    <PackageReference Include="Grpc.AspNetCore.HealthChecks" Version="2.53.0" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Remote\Grpc\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Zoo.Dolphin\AMW.ServiceDiscovery.csproj" />
+  </ItemGroup>
 
 </Project>

@@ -1,4 +1,4 @@
-﻿namespace Zoo.Dolphin.Register.Options;
+﻿namespace AMW.ServiceDiscovery.Register.Options;
 
 public class HealthCheck
 {

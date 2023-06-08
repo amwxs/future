@@ -1,4 +1,4 @@
-﻿namespace Zoo.Dolphin.Remote.Http;
+﻿namespace AMW.ServiceDiscovery.Remote.Http;
 
 public interface IRemoteHttp
 {

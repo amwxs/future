@@ -1,10 +1,10 @@
-﻿using Microsoft.Extensions.Hosting;
-using Zoo.Dolphin.Register;
+﻿using AMW.ServiceDiscovery.Register;
+using Microsoft.Extensions.Hosting;
 
-namespace Zoo.Dolphin;
+namespace AMW.ServiceDiscovery;
 
 
-public class RegisterHosted: IHostedService
+public class RegisterHosted : IHostedService
 {
     private readonly IHostApplicationLifetime _hostApplicationLifetime;
     private readonly IRegisterManager _registerManager;

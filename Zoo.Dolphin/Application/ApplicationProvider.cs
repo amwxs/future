@@ -6,7 +6,7 @@ using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Text;
 
-namespace Zoo.Dolphin.Application;
+namespace AMW.ServiceDiscovery.Application;
 
 public class ApplicationProvider : IApplicationProvider
 {

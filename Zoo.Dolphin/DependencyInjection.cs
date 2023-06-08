@@ -1,21 +1,20 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using AMW.ServiceDiscovery.Application;
+using AMW.ServiceDiscovery.Health;
+using AMW.ServiceDiscovery.Register;
+using AMW.ServiceDiscovery.Register.Client;
+using AMW.ServiceDiscovery.Register.Options;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
-using Zoo.Dolphin.Application;
-using Zoo.Dolphin.Health;
-using Zoo.Dolphin.Registration.Client;
-using Zoo.Dolphin.Register.Client;
-using Zoo.Dolphin.Register.Options;
-using Zoo.Dolphin.Register;
 
-namespace Zoo.Dolphin;
+namespace AMW.ServiceDiscovery;
 
 public static class DependencyInjection
 {
 
-    public static IServiceCollection AddDolphin(this IServiceCollection services,IConfiguration configuration)
+    public static IServiceCollection AddDolphin(this IServiceCollection services, IConfiguration configuration)
     {
         services.Configure<ConsulOptions>(configuration.GetSection(ConsulOptions.Section));
 
@@ -41,7 +40,7 @@ public static class DependencyInjection
     /// <returns></returns>
     public static IApplicationBuilder UseHealth(this WebApplication app)
     {
-       
+
         app.MapGrpcHealthChecksService();
         app.UseMiddleware<HealthMiddleware>();
         return app;

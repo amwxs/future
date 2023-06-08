@@ -1,9 +1,8 @@
-﻿using Consul;
+﻿using AMW.ServiceDiscovery.Register.Options;
+using Consul;
 using Microsoft.Extensions.Options;
-using Zoo.Dolphin.Register.Client;
-using Zoo.Dolphin.Register.Options;
 
-namespace Zoo.Dolphin.Registration.Client;
+namespace AMW.ServiceDiscovery.Register.Client;
 
 public class ConsulClientProvider : IConsulClientProvider
 {

@@ -1,6 +1,6 @@
 ﻿using Consul;
 
-namespace Zoo.Dolphin.Remote;
+namespace AMW.ServiceDiscovery.Remote;
 
 public interface IServicesManager
 {

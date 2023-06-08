@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AMW.ServiceDiscovery.Register.Options;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 using System.Net;
-using Zoo.Dolphin.Register.Options;
 
-namespace Zoo.Dolphin.Health;
+namespace AMW.ServiceDiscovery.Health;
 
 public class HealthMiddleware
 {

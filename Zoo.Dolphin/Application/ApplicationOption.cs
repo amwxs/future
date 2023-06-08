@@ -1,4 +1,4 @@
-﻿namespace Zoo.Dolphin.Application;
+﻿namespace AMW.ServiceDiscovery.Application;
 
 public class ApplicationOption
 {

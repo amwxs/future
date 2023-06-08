@@ -11,11 +11,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sample.APIService", "Sample
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "libraries", "libraries", "{63FDFE6D-FC60-4CDA-B177-5E72804DE5C4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zoo.Dolphin", "Zoo.Dolphin\Zoo.Dolphin.csproj", "{AC5A55A4-3B8A-4E5C-A712-32BF3522E6DA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AMW.ServiceDiscovery", "Zoo.Dolphin\AMW.ServiceDiscovery.csproj", "{AC5A55A4-3B8A-4E5C-A712-32BF3522E6DA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zoo.Woody", "Zoo.Woody\Zoo.Woody.csproj", "{7EC161C8-1F28-431C-B5B3-51E72E570820}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zoo.Peacock", "Zoo.Peacock\Zoo.Peacock.csproj", "{8C80AE34-6CE3-4F54-B0D2-4672786D1DA6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AMW.ServiceDiscovery.Consul", "AMW.ServiceDiscovery.Consul\AMW.ServiceDiscovery.Consul.csproj", "{28921DE7-77EC-4658-9961-59C3BCAF6DCC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +49,10 @@ Global
 		{8C80AE34-6CE3-4F54-B0D2-4672786D1DA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8C80AE34-6CE3-4F54-B0D2-4672786D1DA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8C80AE34-6CE3-4F54-B0D2-4672786D1DA6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28921DE7-77EC-4658-9961-59C3BCAF6DCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28921DE7-77EC-4658-9961-59C3BCAF6DCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28921DE7-77EC-4658-9961-59C3BCAF6DCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28921DE7-77EC-4658-9961-59C3BCAF6DCC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -55,6 +61,7 @@ Global
 		{AC5A55A4-3B8A-4E5C-A712-32BF3522E6DA} = {63FDFE6D-FC60-4CDA-B177-5E72804DE5C4}
 		{7EC161C8-1F28-431C-B5B3-51E72E570820} = {63FDFE6D-FC60-4CDA-B177-5E72804DE5C4}
 		{8C80AE34-6CE3-4F54-B0D2-4672786D1DA6} = {63FDFE6D-FC60-4CDA-B177-5E72804DE5C4}
+		{28921DE7-77EC-4658-9961-59C3BCAF6DCC} = {63FDFE6D-FC60-4CDA-B177-5E72804DE5C4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2BDD9C6A-98F4-4BCA-AB6D-136EEABA69A0}
