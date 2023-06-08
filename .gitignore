@@ -1,5 +1,5 @@
-/*/*/*.user
-/*/.vs
-/*/*/obj
-/*/*/bin
-/src/.idea
+**.user
+**.vs
+**obj
+**.idea
+**bin
