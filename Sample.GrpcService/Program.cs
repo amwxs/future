@@ -1,4 +1,4 @@
-using AMW.ServiceDiscovery;
+using Zoo.Dolphin;
 using Sample.GrpcService.Services;
 
 namespace Sample.GrpcService

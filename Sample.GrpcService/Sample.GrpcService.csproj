@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Zoo.Dolphin\AMW.ServiceDiscovery.csproj" />
+    <ProjectReference Include="..\Zoo.Dolphin\Zoo.Dolphin.csproj" />
   </ItemGroup>
 
 </Project>
