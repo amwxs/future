@@ -1,7 +1,7 @@
-﻿using AMW.ServiceDiscovery.Register;
+﻿using Zoo.Dolphin.Register;
 using Microsoft.Extensions.Hosting;
 
-namespace AMW.ServiceDiscovery;
+namespace Zoo.Dolphin;
 
 
 public class RegisterHosted : IHostedService

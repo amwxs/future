@@ -1,4 +1,4 @@
-﻿namespace AMW.ServiceDiscovery.Register.Options;
+﻿namespace Zoo.Dolphin.Register.Options;
 
 public class ConsulOptions
 {

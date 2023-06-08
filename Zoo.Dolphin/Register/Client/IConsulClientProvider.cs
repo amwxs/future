@@ -1,6 +1,6 @@
 ﻿using Consul;
 
-namespace AMW.ServiceDiscovery.Register.Client;
+namespace Zoo.Dolphin.Register.Client;
 
 public interface IConsulClientProvider
 {

@@ -1,8 +1,8 @@
-﻿using AMW.ServiceDiscovery.Register.Client;
+﻿using Zoo.Dolphin.Register.Client;
 using Consul;
 using Microsoft.Extensions.Logging;
 
-namespace AMW.ServiceDiscovery.Remote;
+namespace Zoo.Dolphin.Remote;
 
 public class ServicesManager : IDisposable, IServicesManager
 {

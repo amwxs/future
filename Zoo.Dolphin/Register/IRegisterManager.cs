@@ -1,4 +1,4 @@
-﻿namespace AMW.ServiceDiscovery.Register;
+﻿namespace Zoo.Dolphin.Register;
 
 public interface IRegisterManager
 {

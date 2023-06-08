@@ -1,4 +1,4 @@
-﻿namespace AMW.ServiceDiscovery.Application;
+﻿namespace Zoo.Dolphin.Application;
 
 internal class AppConst
 {

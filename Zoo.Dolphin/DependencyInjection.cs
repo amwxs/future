@@ -1,15 +1,15 @@
-﻿using AMW.ServiceDiscovery.Application;
-using AMW.ServiceDiscovery.Health;
-using AMW.ServiceDiscovery.Register;
-using AMW.ServiceDiscovery.Register.Client;
-using AMW.ServiceDiscovery.Register.Options;
+﻿using Zoo.Dolphin.Application;
+using Zoo.Dolphin.Health;
+using Zoo.Dolphin.Register;
+using Zoo.Dolphin.Register.Client;
+using Zoo.Dolphin.Register.Options;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
-namespace AMW.ServiceDiscovery;
+namespace Zoo.Dolphin;
 
 public static class DependencyInjection
 {
