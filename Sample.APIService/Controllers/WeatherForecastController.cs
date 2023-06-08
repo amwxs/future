@@ -1,7 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using System.Text.Json;
-using System.Text;
-using Microsoft.AspNetCore.Mvc.Diagnostics;
 
 namespace Sample.APIService.Controllers
 {
@@ -11,15 +8,25 @@ namespace Sample.APIService.Controllers
     {
         private static readonly string[] Summaries = new[]
         {
-        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-    };
+            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+        };
 
         private readonly ILogger<WeatherForecastController> _logger;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        private readonly IHelloService helloService;
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, IHelloService helloService)
         {
             _logger = logger;
+            this.helloService = helloService;
         }
+
+        [HttpGet("hello")]
+
+        public string Hello()
+        {
+            return helloService.Say();
+        }
+
 
         [HttpGet(Name = "GetWeatherForecast")]
         public IEnumerable<WeatherForecast> Get()
