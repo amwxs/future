@@ -34,19 +34,19 @@ namespace Sample.WebAPI.Controllers
         [HttpGet("ApiResponseSuccess")]
         public Result<string> ApiResponseSuccess()
         {
-            return Result.Success("hello", new Pager { PageNo = 1, PageSize = 10, Total = 205 });
+            return Result.Success("hello", new Pager(1, 10, 205));
         }
         
         [HttpGet("ApiResponseFailure")]
         public Result<string> ApiResponseFailure()
         {
-            return Result.Failure<string>(4002, "something is error");
+            return Result.Failure<string>("4002", "something is error");
         }
 
         [HttpGet("Error")]
         public IEnumerable<WeatherForecast> Error()
         {
-            throw new CustException(5000,"something is  error ");
+            throw new CustException("4002", "something is  error ");
         }
     }
 }
