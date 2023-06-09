@@ -10,15 +10,14 @@ namespace Zoo.Woody
         {
             if (context.Result is not ObjectResult objResult) return;
             
-            if (objResult.Value is ApiResponse)
+            if (objResult.Value is Result)
             {
                 return;
             }
 
-            var response = new ApiResponse<object>
+            var response = new Result<object>
             {
                 Data = objResult.Value,
-                Code = 0
             };
             context.Result = new ObjectResult(response)
             {

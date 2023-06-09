@@ -32,21 +32,21 @@ namespace Sample.WebAPI.Controllers
         }
 
         [HttpGet("ApiResponseSuccess")]
-        public ApiResponse<string> ApiResponseSuccess()
+        public Result<string> ApiResponseSuccess()
         {
-            return ApiResponse.Success("hello", new Pager { PageNo = 1, PageSize = 10, Total = 205 });
+            return Result.Success("hello", new Pager { PageNo = 1, PageSize = 10, Total = 205 });
         }
         
         [HttpGet("ApiResponseFailure")]
-        public ApiResponse<string> ApiResponseFailure()
+        public Result<string> ApiResponseFailure()
         {
-            return ApiResponse.Failure<string>(4002, "something is error");
+            return Result.Failure<string>(4002, "something is error");
         }
 
         [HttpGet("Error")]
         public IEnumerable<WeatherForecast> Error()
         {
-            throw new BusinessException(5000,"something is  error ");
+            throw new CustException(5000,"something is  error ");
         }
     }
 }

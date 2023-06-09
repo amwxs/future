@@ -13,7 +13,7 @@ namespace Sample.WebAPI
             builder.Services.AddControllers(c =>
             {
                 c.Filters.Add<GlobalExceptionFilter>();
-                c.Filters.Add<ApiResponseActionFilter>();
+                c.Filters.Add<ResultActionFilter>();
             });
 
             builder.Services.AddEndpointsApiExplorer();

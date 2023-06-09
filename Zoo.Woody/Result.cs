@@ -1,24 +1,24 @@
 ﻿namespace Zoo.Woody
 {
 
-    public class ApiResponse
+    public class Result
     {
-        public static ApiResponse<T> Success<T>(T data, Pager? pager= null)
+        public static Result<T> Success<T>(T data, Pager? pager= null)
         {
-            var response = new ApiResponse<T> {Data = data, Pager = pager, };
+            var response = new Result<T> {Data = data, Pager = pager, };
             return response;
         }
 
-        public static ApiResponse<T> Failure<T>(int code, string message)
+        public static Result<T> Failure<T>(string code, string message)
         {
-            var response = new ApiResponse<T> {Code = code, Message = message};
+            var response = new Result<T> {Code = code, Message = message};
             return response;
         }
     }
 
-    public class ApiResponse<T> : ApiResponse
+    public class Result<T> : Result
     {
-        public int Code { get; set; }
+        public string Code { get; set; } = "0";
         public string Message { get; set; } = string.Empty;
         public T? Data { get; set; }
         public Pager? Pager { get; set; }
@@ -30,10 +30,6 @@
         public int PageSize { get; set; }
         public int Total { get; set; }
 
-        public Pager()
-        {
-            
-        }
         public Pager(int pageNo,int pageSize,int total)
         {
             PageNo = pageNo;

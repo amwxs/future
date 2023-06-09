@@ -19,21 +19,21 @@ namespace Zoo.Woody
 
             // 如果异常没有被处理则进行处理
             if (context.ExceptionHandled) return;
-            var response = new ApiResponse<object>();
-            if (context.Exception is BusinessException businessException)
+            var result = new Result<object>();
+            if (context.Exception is CustException bizException)
             {
-                response.Code = businessException.Code;
-                response.Message = businessException.Message;
+                result.Code = bizException.Code;
+                result.Message = bizException.Message;
             }
             else
             {
                 _logger.LogError(context.Exception,"system error");
 
-                response.Code = StatusCodes.Status500InternalServerError;
-                response.Message = "Sorry, an error has occurred. Please contact the administrator.";
+                result.Code = "5000";
+                result.Message = "Sorry, an error has occurred. Please contact the administrator.";
             }
 
-            context.Result = new ObjectResult(response)
+            context.Result = new ObjectResult(result)
             {
                 StatusCode = StatusCodes.Status200OK
             };
