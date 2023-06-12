@@ -9,9 +9,9 @@ public class Result
         return response;
     }
 
-    public static Result<T> Failure<T>(string code, string message)
+    public static Result<T> Failure<T>(string code, string message, IEnumerable<Error>? errors=null)
     {
-        var response = new Result<T> { Code = code, Message = message };
+        var response = new Result<T> { Code = code, Message = message, Errors = errors };
         return response;
     }
 }
@@ -19,9 +19,10 @@ public class Result
 public class Result<T> : Result
 {
     public string Code { get; set; } = "0";
-    public string Message { get; set; } = string.Empty;
+    public string? Message { get; set; }
     public T? Data { get; set; }
     public Pager? Pager { get; set; }
+    public IEnumerable<Error>? Errors { get; set; }
 }
 
 public class Pager
@@ -36,4 +37,9 @@ public class Pager
         PageSize = pageSize;
         Total = total;
     }
+}
+public class Error
+{
+    public string Filed { get; set; } = string.Empty;
+    public string Message { get; set; } = string.Empty;
 }

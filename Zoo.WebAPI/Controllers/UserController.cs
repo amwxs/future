@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Zoo.Application.Core.Primitives;
 using Zoo.Application.Users.Commands.CreateUser;
 
 namespace Zoo.WebAPI.Controllers
@@ -17,7 +18,7 @@ namespace Zoo.WebAPI.Controllers
 
         [HttpPost("CreateUser")]
         
-        public async Task<bool> CreateUser([FromBody] CreateUserCommand  command)
+        public async Task<Result<bool>> CreateUser([FromBody] CreateUserCommand  command)
         {
            return await _sender.Send(command);
         }

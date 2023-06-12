@@ -1,11 +1,12 @@
 ﻿using Zoo.Application.Core.Abstractions;
+using Zoo.Application.Core.Primitives;
 
 namespace Zoo.Application.Users.Commands.CreateUser;
 
-public class CreateUserCommandHandler : ICommandHandler<CreateUserCommand, bool>
+public class CreateUserCommandHandler : ICommandHandler<CreateUserCommand, Result<bool>>
 {
-    public Task<bool> Handle(CreateUserCommand request, CancellationToken cancellationToken)
+    public Task<Result<bool>> Handle(CreateUserCommand request, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        return Task.FromResult(Result.Success(true));
     }
 }

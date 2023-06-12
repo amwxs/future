@@ -16,9 +16,6 @@ public class GlobalExceptionFilter : ExceptionFilterAttribute
 
     public override void OnException(ExceptionContext context)
     {
-
-        // 如果异常没有被处理则进行处理
-        if (context.ExceptionHandled) return;
         var result = new Result<object>();
         if (context.Exception is CustException custException)
         {
