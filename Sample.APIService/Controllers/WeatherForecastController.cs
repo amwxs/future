@@ -11,22 +11,22 @@ namespace Sample.APIService.Controllers
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
 
-
-
-        private readonly IHelloService helloService;
-        public WeatherForecastController(IHelloService helloService)
+        private readonly IHelloService _helloService;
+        private readonly ILogger<WeatherForecastController> _logger;
+        public WeatherForecastController(IHelloService helloService, ILogger<WeatherForecastController> logger)
         {
-
-            this.helloService = helloService;
+            _helloService = helloService;
+            _logger = logger;
         }
 
+        // create hello function
         [HttpGet("hello")]
-
         public string Hello()
         {
-            return helloService.Say();
+            _logger.LogInformation("Hello");
+        
+            return _helloService.Say();
         }
-
 
         [HttpGet(Name = "GetWeatherForecast")]
         public IEnumerable<WeatherForecast> Get()

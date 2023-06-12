@@ -7,6 +7,7 @@ namespace Sample.APIService
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+// Hello 
             builder.Services.AddScoped<IHelloService, HelloService>();
 
             builder.Services.AddControllers();
@@ -21,7 +22,7 @@ namespace Sample.APIService
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
-                
+
             }
 
             app.UseAuthorization();
