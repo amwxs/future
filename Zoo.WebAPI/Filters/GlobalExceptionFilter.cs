@@ -16,15 +16,15 @@ public class GlobalExceptionFilter : ExceptionFilterAttribute
 
     public override void OnException(ExceptionContext context)
     {
-        var result = new Result<object>();
-        if (context.Exception is CustException custException)
+        var result = new BizResult<object>();
+        if (context.Exception is BizException bizException)
         {
-            result.Code = custException.Code;
-            result.Message = custException.Message;
+            result.Code = bizException.Code;
+            result.Message = bizException.Message;
         }
         else
         {
-            _logger.LogError(context.Exception, "system error");
+            _logger.LogError(context.Exception,"System error");
 
             result.Code = "5000";
             result.Message = "Sorry, an error has occurred. Please contact the administrator.";

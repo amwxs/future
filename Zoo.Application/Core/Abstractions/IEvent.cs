@@ -1,8 +1,7 @@
 ﻿using MediatR;
 
-namespace Zoo.Application.Core.Abstractions
+namespace Zoo.Application.Core.Abstractions;
+
+public interface IEvent : INotification
 {
-    public interface IEvent : INotification
-    {
-    }
 }

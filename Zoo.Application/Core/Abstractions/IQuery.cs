@@ -1,8 +1,7 @@
 ﻿using MediatR;
 
-namespace Zoo.Application.Core.Abstractions
+namespace Zoo.Application.Core.Abstractions;
+
+public interface IQuery<out TResponse> : IRequest<TResponse>
 {
-    public interface IQuery<out TResponse> : IRequest<TResponse>
-    {
-    }
 }

@@ -1,28 +1,28 @@
-﻿namespace Zoo.Application.Core.Primitives;
+﻿namespace Zoo.Application.Core;
 
 
-public class Result
+public class BizResult
 {
-    public static Result<T> Success<T>(T data, Pager? pager = null)
+    public static BizResult<T> Success<T>(T data, Pager? pager = null)
     {
-        var response = new Result<T> { Data = data, Pager = pager, };
+        var response = new BizResult<T> { Data = data, Pager = pager, };
         return response;
     }
 
-    public static Result<T> Failure<T>(string code, string message, IEnumerable<Error>? errors=null)
+    public static BizResult<T> Failure<T>(string code, string message, IEnumerable<BizError>? errors = null)
     {
-        var response = new Result<T> { Code = code, Message = message, Errors = errors };
+        var response = new BizResult<T> { Code = code, Message = message, Errors = errors };
         return response;
     }
 }
 
-public class Result<T> : Result
+public class BizResult<T> : BizResult
 {
     public string Code { get; set; } = "0";
     public string? Message { get; set; }
     public T? Data { get; set; }
     public Pager? Pager { get; set; }
-    public IEnumerable<Error>? Errors { get; set; }
+    public IEnumerable<BizError>? Errors { get; set; }
 }
 
 public class Pager
@@ -38,7 +38,7 @@ public class Pager
         Total = total;
     }
 }
-public class Error
+public class BizError
 {
     public string Filed { get; set; } = string.Empty;
     public string Message { get; set; } = string.Empty;

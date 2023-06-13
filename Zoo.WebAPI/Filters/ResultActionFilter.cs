@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using Zoo.Application.Core.Primitives;
+using Zoo.Application.Core;
 
 namespace Zoo.WebAPI.Filters
 {
@@ -8,16 +8,15 @@ namespace Zoo.WebAPI.Filters
     {
         public void OnActionExecuted(ActionExecutedContext context)
         {
-            if (context.Result is not ObjectResult objResult) return;
-
-            if (objResult.Value is Result)
+            if (context.Result is BizResult)
             {
                 return;
             }
 
-            var response = new Result<object>
+            var resut = context.Result as ObjectResult;
+            var response = new BizResult<object>
             {
-                Data = objResult.Value,
+                Data = resut?.Value,
             };
             context.Result = new ObjectResult(response)
             {

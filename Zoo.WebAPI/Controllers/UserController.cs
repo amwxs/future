@@ -1,7 +1,8 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Zoo.Application.Core.Primitives;
+using Zoo.Application.Core;
 using Zoo.Application.Users.Commands.CreateUser;
+using Zoo.Application.Users.Queries.GetByUserId;
 
 namespace Zoo.WebAPI.Controllers
 {
@@ -10,17 +11,24 @@ namespace Zoo.WebAPI.Controllers
     public class UserController: ControllerBase
     {
         private readonly ISender _sender;
-
+       
         public UserController(ISender sender)
         {
             _sender = sender;
         }
 
-        [HttpPost("CreateUser")]
+        [HttpPost("Create")]
         
-        public async Task<Result<bool>> CreateUser([FromBody] CreateUserCommand  command)
+        public async Task<bool> CreateUser([FromBody] CreateUserCommand  command)
         {
            return await _sender.Send(command);
         }
+
+        [HttpGet("id")]
+        public async Task<BizResult<GetByUserIdRes>>GetByUserId([FromQuery] GetByUserIdQuery query)
+        {
+            return await _sender.Send(query);
+        }
     }
+
 }
