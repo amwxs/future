@@ -14,17 +14,15 @@ namespace Zoo.WebAPI
 
             }).ConfigureApiBehaviorOptions(options =>
             {
+                options.SuppressModelStateInvalidFilter = true;
                 options.InvalidModelStateResponseFactory = context =>
                 {
-
-#pragma warning disable CS8602 // 解引用可能出现空引用。
                     var erros = context.ModelState
-                    .Where(x => x.Value?.Errors.Count > 0)
-                    .Select(x => new BizError { Filed = x.Key, Message = x.Value.Errors.First().ErrorMessage })
-                    .ToList();
-#pragma warning restore CS8602 // 解引用可能出现空引用。
+                        .Where(x => x.Value?.Errors.Count > 0)
+                        .Select(x => new ValidationError(x.Key, x.Value.Errors.First().ErrorMessage))
+                        .ToList();
 
-                    return new ObjectResult(BizResult.Failure<object>("4000", "Parameter validation failed!", erros));
+                    return new ObjectResult(BizResult.Failure<object>("4001", "Parameters validation failed!", erros));
                 };
             });
             return builder;

@@ -19,7 +19,7 @@ namespace Zoo.WebAPI.Controllers
 
         [HttpPost("Create")]
         
-        public async Task<bool> CreateUser([FromBody] CreateUserCommand  command)
+        public async Task<BizResult<bool>> CreateUser([FromBody] CreateUserCommand  command)
         {
            return await _sender.Send(command);
         }
