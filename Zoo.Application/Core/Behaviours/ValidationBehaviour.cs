@@ -30,7 +30,7 @@ public class ValidationBehaviour<TRequest, TResponse> : IPipelineBehavior<TReque
 
         if (failures.Count != 0)
         {
-            throw new CustValidationException(failures.Select(x => new ValidationError(x.PropertyName, x.ErrorMessage)));
+            throw new CustValidationException(failures.Select(x => new Error(x.PropertyName, x.ErrorMessage)));
         }
 
         return await next();

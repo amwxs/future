@@ -3,9 +3,9 @@
 namespace Zoo.Domain.Core.Exceptions;
 public class CustValidationException: Exception
 {
-    public IEnumerable<ValidationError>? ValidationErrors { get; }
+    public IEnumerable<Error>? ValidationErrors { get; }
 
-    public CustValidationException(IEnumerable<ValidationError> errors)
+    public CustValidationException(IEnumerable<Error> errors)
     {
         ValidationErrors = errors;
     }

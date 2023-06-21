@@ -30,7 +30,7 @@ public class GlobalExceptionFilter : ExceptionFilterAttribute
                 result.Message = bizException.Message;
                 break;
             case CustValidationException custValidation:
-                result.ValidationErrors = custValidation.ValidationErrors;
+                result.Errors = custValidation.ValidationErrors;
                 break;
 
             default:
