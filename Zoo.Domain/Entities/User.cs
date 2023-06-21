@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Zoo.Domain.Core.Abstractions;
 
-namespace Zoo.Domain.Entity;
-internal class User
+namespace Zoo.Domain.Entities;
+public class User : AbsFullEntity
 {
 }

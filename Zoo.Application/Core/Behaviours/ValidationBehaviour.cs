@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 using MediatR;
-using Zoo.Domain.Core;
+using Zoo.Domain.Core.Exceptions;
+using Zoo.Domain.Core.Result;
 
 namespace Zoo.Application.Core.Behaviours;
 public class ValidationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
@@ -29,8 +30,7 @@ public class ValidationBehaviour<TRequest, TResponse> : IPipelineBehavior<TReque
 
         if (failures.Count != 0)
         {
-            throw new BizException(_verificationCode, _verificationMessage,
-                failures.Select(x => new ValidationError(x.PropertyName, x.ErrorMessage)));
+            throw new CustValidationException(failures.Select(x => new ValidationError(x.PropertyName, x.ErrorMessage)));
         }
 
         return await next();

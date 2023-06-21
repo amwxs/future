@@ -1,5 +1,4 @@
 using Zoo.Application;
-using Zoo.WebAPI;
 using Zoo.WebAPI.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,7 +10,10 @@ builder.Services.AddControllers(c =>
 {
     c.Filters.Add<GlobalExceptionFilter>();
 
-}).ConfigureGloablBehavior();
+}).ConfigureApiBehaviorOptions(options => 
+{ 
+    options.SuppressModelStateInvalidFilter = true; 
+});
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

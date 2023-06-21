@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Zoo.Application.Core;
+using Zoo.Application.Core.Abstractions;
 using Zoo.Infrastructure.Common;
 
 namespace Zoo.Infrastructure;

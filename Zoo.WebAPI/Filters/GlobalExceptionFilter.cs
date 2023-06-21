@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using Zoo.Application.Core;
-using Zoo.Domain.Core;
+using Zoo.Domain.Core.Exceptions;
+using Zoo.Domain.Core.Result;
 
 namespace Zoo.WebAPI.Filters;
 
@@ -21,21 +21,23 @@ public class GlobalExceptionFilter : ExceptionFilterAttribute
 
     public override void OnException(ExceptionContext context)
     {
-        var result = new BizResult<object>();
+        var result = new CustResult<object>();
 
-        if (context.Exception is BizException bizException)
+        switch (context.Exception)
         {
-            result.Code = bizException.Code;
-            result.Message = bizException.Message;
-            result.ValidationErrors = bizException.ValidationErrors;
+            case CustException bizException:
+                result.Code = bizException.Code;
+                result.Message = bizException.Message;
+                break;
+            case CustValidationException custValidation:
+                result.ValidationErrors = custValidation.ValidationErrors;
+                break;
 
-        }
-        else
-        {
-            _logger.LogError(_systemErrorEvent, context.Exception, _systemError);
-
-            result.Code = _systemErrorCode;
-            result.Message = _systemErrorMessage;
+            default:
+                _logger.LogError(_systemErrorEvent, context.Exception, _systemError);
+                result.Code = _systemErrorCode;
+                result.Message = _systemErrorMessage;
+                break;
         }
 
         context.Result = new ObjectResult(result)

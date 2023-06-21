@@ -1,4 +1,4 @@
-﻿using Zoo.Application.Core;
+﻿using Zoo.Application.Core.Abstractions;
 
 namespace Zoo.Infrastructure.Common;
 internal class MachineDateTime : IDateTime
